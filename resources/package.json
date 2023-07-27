@@ -1,0 +1,19 @@
+{
+  "name": "exwe",
+  "version": "1.0.0",
+  "description": "esbuild",
+  "main": "index.js",
+  "author": "Maksim K",
+  "license": "MIT",
+  "scripts": {
+    "dev": "NODE_ENV=dev node esbuild/build.mjs",
+    "esbuild-prod": "NODE_ENV=prod node esbuild/build.mjs",
+    "esbuild-serve": "node esbuild/serve.mjs",
+    "esbuild-watch": "node esbuild/watch.mjs",
+    "esbuild-version": "esbuild --version"
+  },
+  "devDependencies": {
+    "@esbuild/linux-x64": "^0.18.17",
+    "esbuild": "^0.18.17"
+  }
+}
