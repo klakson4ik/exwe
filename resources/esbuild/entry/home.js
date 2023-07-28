@@ -1,1 +1,2 @@
-import '../../src/common/common'
+'common',
+'partials/popup'

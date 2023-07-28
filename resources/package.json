@@ -6,8 +6,8 @@
   "author": "Maksim K",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=dev node esbuild/build.mjs",
-    "esbuild-prod": "NODE_ENV=prod node esbuild/build.mjs",
+    "dev": "node esbuild/build.js",
+    "esbuild-prod": "NODE_ENV=prod node esbuild/build.js",
     "esbuild-serve": "node esbuild/serve.mjs",
     "esbuild-watch": "node esbuild/watch.mjs",
     "esbuild-version": "esbuild --version"
