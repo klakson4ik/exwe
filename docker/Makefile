@@ -4,7 +4,7 @@ include .env
 PHP_FPM=php-fpm-${PHP_VERSION}
 #DB_CONTAINER_NAME=$(DOCKER)_mariadb_1
 WEB_SERVER=nginx
-NODE_IMAGE_NAME=node
+NODE=node-${NODE_VERSION}
 
 # mysql variables
 DB_DATABASE=
@@ -35,6 +35,10 @@ nop:
 up:
 	docker-compose up -d $(LIST_OF_CONTAINERS_TO_RUN)
 
+.PHONY: up node
+upnode:
+	docker-compose run $(NODE) sh
+
 # stop all containers
 .PHONY: down
 down:
@@ -57,6 +61,9 @@ redb:
 reweb:
 	docker-compose up -d --no-deps --build $(WEB_SERVER)
 
+.PHONY: rebuild node
+renode:
+	docker-compose up -d --no-deps --build $(NODE)
 
 # show docker log
 .PHONY: docker log
@@ -76,6 +83,10 @@ jdb:
 .PHONY: join web-server
 jweb:
 	docker exec -it $(WEB_SERVER) sh
+
+.PHONY: join node
+jnode:
+	docker exec -it $(NODE) sh
 
 # events
 .PHONY: event php-fpm
