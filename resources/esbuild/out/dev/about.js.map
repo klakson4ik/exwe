@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/common/header/header.js"],
+  "sourcesContent": ["console.log('HEADER')"],
+  "mappings": ";;AAAA,UAAQ,IAAI,QAAQ;",
+  "names": []
+}

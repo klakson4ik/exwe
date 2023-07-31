@@ -5,9 +5,12 @@
   "main": "index.js",
   "author": "Maksim K",
   "license": "MIT",
+  "type": "module",
+  "browserslist": "defaults",
   "scripts": {
-    "dev": "node esbuild/build.js",
-    "esbuild-prod": "NODE_ENV=prod node esbuild/build.js",
+    "dev": "node esbuild/build.mjs",
+    "prod": "node esbuild/build.mjs prod",
+    "esbuild-prod": "node esbuild/build.js",
     "esbuild-serve": "node esbuild/serve.mjs",
     "esbuild-watch": "node esbuild/watch.mjs",
     "esbuild-version": "esbuild --version"
@@ -15,11 +18,14 @@
   "devDependencies": {
     "@esbuild/linux-x64": "^0.18.17",
     "autoprefixer": "^10.4.14",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "cross-env": "^7.0.3",
     "esbuild": "^0.18.17",
-    "esbuild-plugin-stylelint": "^0.0.2",
+    "esbuild-plugin-babel": "^0.2.3",
     "esbuild-sass-plugin": "^2.10.0",
     "postcss": "^8.4.27",
-    "stylelint": "^15.10.2",
-    "stylelint-formatter-pretty": "^3.2.0"
+    "postcss-preset-env": "^9.1.0",
+    "stylelint": "^15.10.2"
   }
 }

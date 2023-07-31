@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/partials/modal/modal.js", "../../../src/common/header/header.js", "../../../src/partials/popup/popup.js"],
+  "sourcesContent": ["console.log('MODAL')", "console.log('HEADER')", "console.log('POPUP')"],
+  "mappings": ";;AAAA,UAAQ,IAAI,OAAO;;;ACAnB,UAAQ,IAAI,QAAQ;;;ACApB,UAAQ,IAAI,OAAO;",
+  "names": []
+}

@@ -1,12 +1,12 @@
-const path = require('path')
-const fs = require('fs');
-const os = require('os');
-const { entryList } = require('../../config');
-const { recreateDir, resolveRoot } = require('../utils/fs');
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import config from '../../config.js';
+import { recreateDir, resolveRoot } from '../utils/fs.mjs';
 
-class Entries {
+export default class Entries {
 
-	#tmpDir = os.tm + '/esbuild';
+	#tmpDir = os.tmpdir + '/esbuild';
 	#entryPath = 'entry';
 	#viewPath = 'src'
 
@@ -45,10 +45,10 @@ class Entries {
 	}
 
 	get = () => {
-		if (!entryList) return console.error('Необходимо подключить entry в файле resources/config.js')
+		if (!config.entryList) return console.error('Необходимо подключить entry в файле resources/config.js')
 		let newEntries = [];
 		recreateDir(this.#tmpDir)
-		entryList.forEach(async entryName => {
+		config.entryList.forEach(async entryName => {
 			const file = fs.readFileSync(resolveRoot(this.#entryPath, entryName), 'utf8', (error, file) => {
 				if (error) throw `В директории ${this.#entryPath} остутсвует файл: ${entryName}`;
 				return file
@@ -64,5 +64,3 @@ class Entries {
 		return newEntries
 	}
 }
-
-module.exports = new Entries;
