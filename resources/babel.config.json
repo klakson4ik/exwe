@@ -1,0 +1,18 @@
+{
+	"presets": [
+	  [
+		"@babel/preset-env",
+		{
+		  "useBuiltIns": "entry",
+		  "corejs": "3",
+		  "exclude": ["proposal-dynamic-import"],
+		  "modules": "amd"
+		}
+	  ]
+	],
+	"plugins": [
+		["@babel/plugin-transform-modules-commonjs", {
+		  "allowTopLevelThis": true
+		}]
+	  ]
+  }

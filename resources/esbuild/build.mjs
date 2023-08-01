@@ -1,7 +1,6 @@
 import esbuild from 'esbuild'
-import { argv, config } from 'process'
-import { dev, prod } from './assembly.mjs'
+import { argv } from 'process'
+import mode from './mode.mjs'
 
-config = argv[2] || dev;
 
-esbuild.build(config);
+esbuild.build(mode[argv[2]] || mode.dev);

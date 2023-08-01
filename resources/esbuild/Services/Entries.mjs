@@ -1,7 +1,7 @@
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import config from '../../config.js';
+import config from '../../config.mjs';
 import { recreateDir, resolveRoot } from '../utils/fs.mjs';
 
 export default class Entries {
@@ -42,6 +42,31 @@ export default class Entries {
 			}
 		})
 		return arrFiles
+	}
+
+	getAll = () => {
+		if (!config.entryList) return console.error('Необходимо подключить entry в файле resources/config.js')
+		let newEntries = [];
+		recreateDir(this.#tmpDir)
+		config.entryList.forEach(async entryName => {
+			this.getOne(entryName)
+			newEntries.push(path.join(this.#tmpDir, entryName));
+		})
+		return newEntries
+	}
+
+	getOne = (entryName) => {
+		const file = fs.readFileSync(resolveRoot(this.#entryPath, entryName), 'utf8', (error, file) => {
+			if (error) throw `В директории ${this.#entryPath} остутсвует файл: ${entryName}`;
+			return file
+		})
+		let arrFiles = []
+		file.split('\n').forEach(rawLine => {
+			const line = rawLine.replace(/'|"|,|\r/g, '');
+			arrFiles = arrFiles.concat(this.#getRecursiveFiles(resolveRoot(this.#viewPath, line)))
+		})
+		this.#createEntryIntoTmp(arrFiles, entryName)
+		return path.join(this.#tmpDir, entryName);
 	}
 
 	get = () => {
