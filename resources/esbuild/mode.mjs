@@ -5,16 +5,18 @@ import Entries from './Services/Entries.mjs';
 import { resolveRoot } from './utils/fs.mjs';
 import autoprefixer from 'autoprefixer';
 import postcssPresetEnv from 'postcss-preset-env'
+import resolver from './plugins/resolver.mjs';
 
 export default {
 	dev: {
-		entryPoints: new Entries().get(),
+		entryPoints: [resolveRoot('entry', 'home.js')],
 		bundle: true,
 		write: true,
 		sourcemap: true,
 		metafile: true,
 		outdir: resolveRoot('esbuild', 'out', 'dev'),
 		plugins: [
+			resolver,
 			sassPlugin({
 				async transform(source, resolveDir) {
 					const { css } = await postcss([]).process(source, { from: resolveDir })
@@ -23,21 +25,21 @@ export default {
 			}),
 		],
 	},
-	prod: {
-		entryPoints: new Entries().get(),
-		bundle: true,
-		write: true,
-		metafile: true,
-		minify: true,
-		outdir: resolveRoot('esbuild', 'out', 'prod'),
-		plugins: [
-			sassPlugin({
-				async transform(source, resolveDir) {
-					const { css } = await postcss([autoprefixer, postcssPresetEnv({ stage: 1 })]).process(source, { from: resolveDir })
-					return css
-				}
-			}),
-			babel()
-		],
-	}
+	// prod: {
+	// 	entryPoints: new Entries().get(),
+	// 	bundle: true,
+	// 	write: true,
+	// 	metafile: true,
+	// 	minify: true,
+	// 	outdir: resolveRoot('esbuild', 'out', 'prod'),
+	// 	plugins: [
+	// 		sassPlugin({
+	// 			async transform(source, resolveDir) {
+	// 				const { css } = await postcss([autoprefixer, postcssPresetEnv({ stage: 1 })]).process(source, { from: resolveDir })
+	// 				return css
+	// 			}
+	// 		}),
+	// 		babel()
+	// 	],
+	// }
 }

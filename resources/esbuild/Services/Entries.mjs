@@ -22,21 +22,26 @@ export default class Entries {
 		})
 	}
 
-	#getRecursiveFiles = (entry, arrFiles = []) => {
-		if (fs.statSync(entry, errStat => {
-			if (errStat) throw errStat;
-		}).isFile()) {
-			return entry;
-		}
-		const dirs = fs.readdirSync(entry, (err) => {
+	toImportString(array){
+		let content = ''
+		array.forEach(el => {
+			if (/\.(js|scss)$/.test(el)) {
+				content += 'import \'' + el + '\';\n';
+			}
+		})
+		return content;
+	}
+
+	getRecursiveFiles = (entry, arrFiles = []) => {
+		const dir = fs.readdirSync(entry, (err) => {
 			if (err) { throw err }
 		});
-		dirs.forEach(file => {
+		dir.forEach(file => {
 			const filePath = path.join(entry, file)
 			if (fs.statSync(filePath, errStat => {
 				if (errStat) throw errStat;
 			}).isDirectory())
-				arrFiles = this.#getRecursiveFiles(filePath, arrFiles);
+				arrFiles = this.getRecursiveFiles(filePath, arrFiles);
 			else {
 				arrFiles.push(filePath);
 			}
@@ -63,10 +68,9 @@ export default class Entries {
 		let arrFiles = []
 		file.split('\n').forEach(rawLine => {
 			const line = rawLine.replace(/'|"|,|\r/g, '');
-			arrFiles = arrFiles.concat(this.#getRecursiveFiles(resolveRoot(this.#viewPath, line)))
+			arrFiles = arrFiles.concat(this.getRecursiveFiles(resolveRoot(this.#viewPath, line)))
 		})
-		this.#createEntryIntoTmp(arrFiles, entryName)
-		return path.join(this.#tmpDir, entryName);
+		return arrFiles;
 	}
 
 	get = () => {
@@ -81,7 +85,7 @@ export default class Entries {
 			let arrFiles = []
 			file.split('\n').forEach(rawLine => {
 				const line = rawLine.replace(/'|"|,|\r/g, '');
-				arrFiles = arrFiles.concat(this.#getRecursiveFiles(resolveRoot(this.#viewPath, line)))
+				arrFiles = arrFiles.concat(this.getRecursiveFiles(resolveRoot(this.#viewPath, line)))
 			})
 			this.#createEntryIntoTmp(arrFiles, entryName)
 			newEntries.push(path.join(this.#tmpDir, entryName));
