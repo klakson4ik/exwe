@@ -1,1 +1,1 @@
-import 'common'
+import 'partials/modal/error.js;'

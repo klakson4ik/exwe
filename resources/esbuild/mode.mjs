@@ -25,21 +25,22 @@ export default {
 			}),
 		],
 	},
-	// prod: {
-	// 	entryPoints: new Entries().get(),
-	// 	bundle: true,
-	// 	write: true,
-	// 	metafile: true,
-	// 	minify: true,
-	// 	outdir: resolveRoot('esbuild', 'out', 'prod'),
-	// 	plugins: [
-	// 		sassPlugin({
-	// 			async transform(source, resolveDir) {
-	// 				const { css } = await postcss([autoprefixer, postcssPresetEnv({ stage: 1 })]).process(source, { from: resolveDir })
-	// 				return css
-	// 			}
-	// 		}),
-	// 		babel()
-	// 	],
-	// }
+	prod: {
+		entryPoints: [resolveRoot('entry', 'home.js')],
+		bundle: true,
+		write: true,
+		metafile: true,
+		minify: true,
+		outdir: resolveRoot('esbuild', 'out', 'prod'),
+		plugins: [
+			resolver,
+			sassPlugin({
+				async transform(source, resolveDir) {
+					const { css } = await postcss([autoprefixer, postcssPresetEnv({ stage: 1 })]).process(source, { from: resolveDir })
+					return css
+				}
+			}),
+			babel()
+		],
+	}
 }

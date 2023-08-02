@@ -1,31 +1,51 @@
-import { build } from "esbuild"
-import { resolveRoot } from "../utils/fs.mjs"
-import Entries from "../Services/Entries.mjs"
+import { getRecursiveFiles, resolveRoot } from "../utils/fs.mjs"
 
 export default {
 	name: 'resolver',
 	setup(build) {
-		// Intercept import paths called "env" so esbuild doesn't attempt
-		// to map them to a file system location. Tag them with the "env-ns"
-		// namespace to reserve them for this plugin.
-		build.onResolve({ filter: /^common$/ }, () => ({
-			path: resolveRoot('src', 'common'),
-			namespace: 'blocks',
-		}))
+		
+		build.onResolve({ filter: /^(common|layouts|pages|partials)/ }, (args) => {
+			console.log('common')
+			if (args.kind == 'import-statement' && !/\.(js|scss);?,?$/.test(args.path)) {
+				return {
+					path: resolveRoot('src', args.path),
+					namespace: 'blocks',
+				}
+			}
+		})
 
-		// Load paths tagged with the "env-ns" namespace and behave as if
-		// they point to a JSON file containing the environment variables.
+		build.onResolve({ filter: /(\.(js|scss)$)/ }, (args) => {
+			console.log('js')
+			if (args.kind == 'import-statement') {
+				return {
+					path: resolveRoot('src', args.path),
+					namespace: 'fullpatn',
+				}
+			}
+		})
+		// build.onResolve({ filter: /^.+$/ }, () => ({
+		// 	path: resolveRoot('src'),
+		// 	namespace: 'blocks',
+		// })),
 		build.onLoad({ filter: /.+/, namespace: 'blocks' }, (args) => {
-			console.log(args)
-			const entryClass = new Entries();
-			const files = entryClass.getRecursiveFiles(args.path)
-			const importSting = entryClass.toImportString(files)
-			console.log(importSting)
+			let importSting = ''
+			// console.log(args.path)
+			getRecursiveFiles(args.path).forEach(file => {
+				if (/\.(js|scss)$/.test(file)) {
+					importSting += 'import \'' + file + '\';\n';
+				}
+			})
+			// console.log(importSting);
 
 			return {
 				contents: importSting,
 				loader: 'js',
+				resolveDir: args.path
 			}
 		})
+		build.onLoad({ filter: /.+/, namespace: 'fullpath'}, args => {
+			console.log(args)
+		})
+
 	},
 }

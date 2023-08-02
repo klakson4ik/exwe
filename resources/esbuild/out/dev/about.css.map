@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../src/common/footer/footer.scss", "../../../src/common/header/header.scss"],
-  "sourcesContent": [".class-1 {\n    background-color: antiquewhite;\n    filter: hue-rotate(90deg);\n    & .class-2 {\n        display: grid;\n        contain: strict;\n        grid-template-columns: repeat(1fr);\n        hyphens: manual;\n        object-fit: contain;\n    }\n}", "$black: black;\n\n.class-2 {\n    color: $black;\n}"],
-  "mappings": ";AAAA,CAAA;AACI,oBAAA;AACA,UAAA,WAAA;;AACA,CAAA,QAAA,CAAA;AACI,WAAA;AACA,WAAA;AACA,yBAAA,OAAA;AACA,WAAA;AACA,cAAA;;;;ACNR,CAAA;AACI,SAHI;;",
-  "names": []
-}
