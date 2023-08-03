@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"paths": {
+			"common": [
+				"common"
+			],
+			"partials": [
+				"partials"
+			],
+			"pages": [
+				"pages"
+			],
+			"layouts": [
+				"layouts"
+			],
+			"@": [
+				"../node_modules/"
+			],
+			"~/": [
+				"../node_modules/*"
+			],
+			"node_modules": [
+				"../node_modules"
+			],
+		}
+	},
+	"include": [
+		"**/node_modules"
+	]
+}
