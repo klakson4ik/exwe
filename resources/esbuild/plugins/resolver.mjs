@@ -1,51 +1,68 @@
 import { getRecursiveFiles, resolveRoot } from "../utils/fs.mjs"
+import path from 'path';
+import fs from 'fs'
+import babelCore from '@babel/core';
 
-export default {
+const pluginResolver = (options = {}) => ({
 	name: 'resolver',
 	setup(build) {
-		
-		build.onResolve({ filter: /^(common|layouts|pages|partials)/ }, (args) => {
-			console.log('common')
-			if (args.kind == 'import-statement' && !/\.(js|scss);?,?$/.test(args.path)) {
-				return {
-					path: resolveRoot('src', args.path),
-					namespace: 'blocks',
+		const transformContents = (file) => {
+			const babelOptions = babelCore.loadOptions({
+				filename: file,
+				caller: {
+					name: 'babel',
+					supportsStaticESM: true
 				}
-			}
-		})
+			});
 
-		build.onResolve({ filter: /(\.(js|scss)$)/ }, (args) => {
-			console.log('js')
+			if (babelOptions.sourceMaps) {
+				const filename = path.relative(process.cwd(), file);
+
+				babelOptions.sourceFileName = filename;
+			}
+
+			const contents = fs.readFileSync(file, 'utf8');
+			return babelCore.transform(contents, babelOptions).code
+
+			// return new Promise((resolve, reject) => {
+			// 	babelCore.transform(contents, babelOptions, (error, result) => {
+			// 		error ? reject(error) : resolve({ contents: result.code });
+			// 	});
+			// });
+		};
+
+		build.onResolve({ filter: /^(common|layouts|pages|partials)\/.+/ }, (args) => {
 			if (args.kind == 'import-statement') {
 				return {
-					path: resolveRoot('src', args.path),
-					namespace: 'fullpatn',
+					path: /\.(js|scss);?,?$/.test(args.path) ? resolveRoot('src', args.path) : path.join('src', args.path),
+					namespace: /\.(js|scss);?,?$/.test(args.path) ? 'file' : 'blocks',
 				}
 			}
 		})
-		// build.onResolve({ filter: /^.+$/ }, () => ({
-		// 	path: resolveRoot('src'),
-		// 	namespace: 'blocks',
-		// })),
+
 		build.onLoad({ filter: /.+/, namespace: 'blocks' }, (args) => {
-			let importSting = ''
-			// console.log(args.path)
+			let content = ''
 			getRecursiveFiles(args.path).forEach(file => {
-				if (/\.(js|scss)$/.test(file)) {
-					importSting += 'import \'' + file + '\';\n';
+				if (/\.scss$/.test(file)) {
+					content += 'import \'.' + file.replace(args.path, '') + '\';\n';
+				}
+				if (/\.js$/.test(file)) {
+					content += transformContents(file) + '\n';
 				}
 			})
-			// console.log(importSting);
+			console.log(content)
 
 			return {
-				contents: importSting,
+				contents: content,
 				loader: 'js',
-				resolveDir: args.path
+				resolveDir: resolveRoot(args.path)
 			}
 		})
-		build.onLoad({ filter: /.+/, namespace: 'fullpath'}, args => {
-			console.log(args)
+		build.onStart(() => {
+			console.log('build started')
 		})
+	}
+})
 
-	},
-}
+export default pluginResolver;
+
