@@ -99,8 +99,5 @@
 
   // src/partials/modal/modal.js
   console.log("MODAL");
-
-  // node_modules/test/test.js
-  console.log("TTTTTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 })();
 //# sourceMappingURL=home.js.map

@@ -1,0 +1,29 @@
+/* src/common/footer/footer.scss */
+.class-1 {
+  background-color: antiquewhite;
+  filter: hue-rotate(90deg);
+}
+.class-1 .class-2 {
+  display: grid;
+  contain: strict;
+  grid-template-columns: repeat(1fr);
+  hyphens: manual;
+  object-fit: contain;
+  color: #fefefe;
+}
+@media screen and (min-width: add-unit(1024px, "px")) {
+  .class-1 .class-2 {
+    color: #fefefe;
+  }
+}
+
+/* src/common/header/header.scss */
+.class-2 {
+  color: black;
+}
+
+/* src/partials/popup/popup.scss */
+.class-s {
+  background-attachment: fixed;
+}
+/*# sourceMappingURL=home.css.map */

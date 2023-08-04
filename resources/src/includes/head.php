@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width">
     <meta name="format-detection" content="telephone=no">
 
-    <script type="text/javascript" src="<?= $assets['script'] ?>"></script>
+    <script type="text/javascript" src="/assets/<?= $assets['script'] ?>"></script>
 
-    <link rel="stylesheet" type="text/css" href="<?= $assets['style'] ?>" media="all">
+    <link rel="stylesheet" type="text/css" href="/assets/<?= $assets['style'] ?>" media="all">
 
     <?= View::include('favicon') ?>
 

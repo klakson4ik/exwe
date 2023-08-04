@@ -1,1 +1,1 @@
-<div><?= vd($data) ?></div>
+<div class="test"><?=$data['test'] ?></div>

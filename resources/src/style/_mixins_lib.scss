@@ -1,0 +1,59 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:string";
+
+// Это библиотечные миксины, их править и дополнять нельзя.
+// Свои миксины размещайте в файле _mixins_app.scss
+
+@mixin breakpoint($breakpoint) {
+	$width: 0;
+	$only: false;
+	$known: map.keys($breakpoints);
+	$keys: list.length($known);
+
+	@if type-of($breakpoint) == "list" {
+		$only: "only" == list.nth($breakpoint, 2);
+		$breakpoint: list.nth($breakpoint, 1);
+	}
+
+	@if map-has-key($breakpoints, $breakpoint) {
+		$width: #{map.get($breakpoints, $breakpoint)};
+	} @else if type-of($breakpoint) == "number" {
+		$width: #{$breakpoint};
+	}
+
+	@if 0 == $width {
+		@warn "Нет брейкпоинта #{"" + $breakpoint}. Доступные значения: #{$known}.";
+	} @else {
+		$width: add-unit($width, "px");
+		$conditions-block: "(min-width: #{$width})";
+
+		@if $only {
+			$next-index: list.index($known, $breakpoint) + 1;
+
+			@if $keys >= $next-index {
+				$next-key: list.nth($known, $next-index);
+
+				@if map.has-key($breakpoints, $next-key) {
+					$conditions-block: "#{$conditions-block} and (max-width: #{add-unit(map.get($breakpoints, $next-key) - 1, "px")})";
+				}
+			}
+		}
+
+		@media screen and #{$conditions-block} {
+			@content;
+		}
+	}
+}
+
+@mixin font-face($name, $path, $weight: normal, $style: normal, $woff2: false) {
+	$src: if($woff2, list.append(null, url($path + ".woff2") format(string.quote("woff2"))), null);
+	$src: list.append($src, url($path + ".woff") format(string.quote("woff")), comma);
+
+	@font-face {
+		font-family: string.quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}

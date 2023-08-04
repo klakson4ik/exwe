@@ -7,5 +7,10 @@
         grid-template-columns: repeat(1fr);
         hyphens: manual;
         object-fit: contain;
+        color: $color-white;
+
+        @include breakpoint(large){
+            color: $color-white;
+        }
     }
 }

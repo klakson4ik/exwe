@@ -1,3 +1,171 @@
+@charset "UTF-8";
+
+/* src/style/layout/base.scss */
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 100;
+  src: url(./Roboto-Thin-4SCHA7C2.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 100;
+  src: url(./Roboto-ThinItalic-YVPTL5TL.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  src: url(./Roboto-Light-S7WD7FVT.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 300;
+  src: url(./Roboto-LightItalic-YDLXPM2K.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: normal;
+  src: url(./Roboto-Regular-34JHVTK6.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: normal;
+  src: url(./Roboto-Italic-NYCCNZ3C.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  src: url(./Roboto-Medium-KXD7VJPM.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 500;
+  src: url(./Roboto-MediumItalic-OL3KA4BZ.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  src: url(./Roboto-Bold-HP4W2MEK.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 700;
+  src: url(./Roboto-BoldItalic-X5RBV7NB.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 900;
+  src: url(./Roboto-Black-6RCAHTXN.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 900;
+  src: url(./Roboto-BlackItalic-IF4JESPH.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: url(./Roboto-Regular.cyrillic-ext-W6W4PAGD.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 300;
+  src: url(./RobotoCondensed-Light-KS7KXFUB.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: italic;
+  font-weight: 300;
+  src: url(./RobotoCondensed-LightItalic-LMV62XNS.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: normal;
+  src: url(./RobotoCondensed-Regular-LEMN4V5S.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: italic;
+  font-weight: normal;
+  src: url(./RobotoCondensed-Italic-DT6CWARR.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 700;
+  src: url(./RobotoCondensed-Bold-AGL7KZ5M.woff) format("woff");
+}
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: italic;
+  font-weight: 700;
+  src: url(./RobotoCondensed-BoldItalic-A2OF6346.woff) format("woff");
+}
+@font-face {
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  src: url(./Georgia-Regular-7HRX4334.woff) format("woff");
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 100;
+  src: url(./SourceSansPro-Light-2IKAZRCD.woff) format("woff");
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 300;
+  src: url(./SourceSansPro-Regular-4U2XABML.woff) format("woff");
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  font-style: bold;
+  font-weight: 600;
+  src: url(./SourceSansPro-SemiBold-2PYKUPAT.woff) format("woff");
+}
+@font-face {
+  font-family: Icomoon;
+  src: url(./icomoon-v13-VX4IH2DP.ttf);
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+html {
+  box-sizing: border-box;
+}
+body {
+  min-width: 320px;
+  background-color: #fefefe;
+  color: #0a0a0a;
+  font-family:
+    "Helvetica Neue",
+    helvetica,
+    roboto,
+    arial,
+    sans-serif;
+}
+img {
+  max-width: 100%;
+}
+
 /* src/common/footer/footer.scss */
 .class-1 {
   background-color: antiquewhite;
@@ -9,6 +177,12 @@
   grid-template-columns: repeat(1fr);
   hyphens: manual;
   object-fit: contain;
+  color: #fefefe;
+}
+@media screen and (min-width: add-unit(1024px, "px")) {
+  .class-1 .class-2 {
+    color: #fefefe;
+  }
 }
 
 /* src/common/header/header.scss */

@@ -13,14 +13,18 @@ export default {
 		write: true,
 		sourcemap: true,
 		metafile: true,
-		outdir: resolveRoot('esbuild', 'out', 'dev'),
+		outdir: resolveRoot('..', 'public', 'assets'),
 		plugins: [
 			resolver(),
 			sassPlugin({
+				precompile(source, pathname, isRoot) {
+					return isRoot ? `@import '${resolveRoot('src/style/style.scss')}';\n${source}` : source
+				},
 				async transform(source, resolveDir) {
 					const { css } = await postcss([]).process(source, { from: resolveDir })
 					return css
-				}
+				},
+
 			}),
 		],
 	},

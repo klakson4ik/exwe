@@ -1,9 +1,9 @@
 {
 	"compilerOptions": {
-		"baseUrl": "./src",
+		"baseUrl": ".",
 		"paths": {
 			"common": [
-				"common"
+				".src/common"
 			],
 			"partials": [
 				"partials"
@@ -14,18 +14,13 @@
 			"layouts": [
 				"layouts"
 			],
-			"@": [
-				"../node_modules/"
+			"style": [
+				"style"
 			],
-			"~/": [
-				"../node_modules/*"
-			],
-			"node_modules": [
-				"../node_modules"
+			"fonts": [
+				"fonts"
 			],
 		}
 	},
-	"include": [
-		"**/node_modules"
-	]
+	"include": []
 }
