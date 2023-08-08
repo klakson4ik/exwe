@@ -1,4 +1,5 @@
-import SimpleSlider from 'common/footer/footer'
-console.log('HEADER')
+import SimpleSlider from 'common/footer/footer';
+
+console.log('HEADER');
 
 new SimpleSlider();

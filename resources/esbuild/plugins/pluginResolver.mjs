@@ -1,5 +1,4 @@
 import { getRecursiveFiles, resolveRoot } from "../utils/fs.mjs"
-import path from 'path';
 import fs from 'fs'
 
 const pluginResolver = () => ({
@@ -13,7 +12,7 @@ const pluginResolver = () => ({
 				}
 			} else {
 				return {
-					path: resolveRoot('src', args.path),
+					path: resolveRoot('src', args.path + (/\.(scss|js)$/.test(args.path) ? '' : '.js')),
 				}
 			}
 		})
@@ -25,15 +24,14 @@ const pluginResolver = () => ({
 			}
 		})
 
-		build.onResolve({ filter: /^(\@|node\_modules)\/?.*/ }, (args) => {
+		build.onResolve({ filter: /^\@\/?.*/ }, (args) => {
 			return {
-				path: resolveRoot(args.path),
+				path: resolveRoot(args.path.replace('@', 'node_modules')),
 			}
 		})
 
 		build.onLoad({ filter: /.+/, namespace: 'dir' }, (args) => {
 			let imports = ''
-			console.log(args)
 			getRecursiveFiles(args.path).forEach(file => {
 				if (/\.(scss|js)$/.test(file)) {
 					imports += 'import \'.' + file.replace(args.path, '') + '\'\n';
@@ -57,7 +55,7 @@ const pluginResolver = () => ({
 
 		})
 		build.onEnd(result => {
-			console.log(result.metafile)
+			// console.log(result.metafile)
 		})
 	}
 })

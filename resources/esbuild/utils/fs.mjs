@@ -29,6 +29,12 @@ export const recreateDir = (dir) =>  {
     }
 }
 
+export const getFiles = (inputDir) => {
+    return readdirSync(inputDir, (err) => {
+        if (err) { throw err }
+    });
+}
+
 export const getRecursiveFiles = (inputDir, arrFiles = []) => {
     const dir = readdirSync(inputDir, (err) => {
         if (err) { throw err }

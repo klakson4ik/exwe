@@ -51,9 +51,9 @@
 	$src: list.append($src, url($path + ".woff") format(string.quote("woff")), comma);
 
 	@font-face {
+		font-weight: $weight;
 		font-family: string.quote($name);
 		font-style: $style;
-		font-weight: $weight;
 		src: $src;
 	}
 }

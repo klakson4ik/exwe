@@ -15,16 +15,24 @@
     "esbuild-version": "esbuild --version"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/eslint-parser": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
     "@esbuild/linux-x64": "^0.18.17",
     "autoprefixer": "^10.4.14",
-    "@babel/core": "^7.22.9",
-    "@babel/preset-env": "^7.22.9",
+    "chalk": "^5.3.0",
     "cross-env": "^7.0.3",
     "esbuild": "^0.18.17",
     "esbuild-plugin-babel": "^0.2.3",
     "esbuild-sass-plugin": "^2.10.0",
+    "eslint": "^8.46.0",
+    "imagemin": "^8.0.1",
+    "imagemin-webp": "^8.0.0",
     "postcss": "^8.4.27",
     "postcss-preset-env": "^9.1.0",
-    "stylelint": "^15.10.2"
+    "stylelint": "^15.10.2",
+    "stylelint-config-idiomatic-order": "^9.0.0",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard-scss": "^10.0.0"
   }
 }

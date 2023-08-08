@@ -1,1 +1,1 @@
-console.log('MODAL')
+console.log('MODAL');
