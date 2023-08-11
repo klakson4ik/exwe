@@ -57,6 +57,6 @@ esbuild.build({
 				return css
 			},
 		}),
-		images()
+		images(config.img)
 	],
 });

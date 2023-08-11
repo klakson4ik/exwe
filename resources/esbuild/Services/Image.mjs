@@ -3,13 +3,15 @@ import imageminWebp from 'imagemin-webp';
 
 export default class Image {
 
-	static async convertToWebp(path) {
-		const result = await imagemin([path + '/*.{jpg,png}'], {
+	static async convertToWebp(path, config) {
+		return await imagemin([path + '/*.{jpg,png}'], {
 			destination: path,
 			plugins: [
-				imageminWebp({quality: 70})
+				imageminWebp({
+					quality: config.quality || 75,
+					preset: 'photo'
+				})
 			]
 		});
-		console.log(result)
 	}
 }

@@ -47,6 +47,7 @@ const pluginResolver = () => ({
 
 		build.onLoad({ filter: /.+/, namespace: 'fonts' }, (args) => {
 			const content = new Uint8Array(fs.readFileSync(args.path))
+			console.log(content)
 
 			return {
 				contents: content,

@@ -3,6 +3,9 @@ export default {
         'home.js', 'about.js'
     ],
     outdir: 'public/assets',
+    img: {
+        quality: 75
+    },
     modes: {
         dev: {
             hash: false,
