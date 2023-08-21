@@ -1,0 +1,78 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "shift+tab",
+        "command": "workbench.action.focusNextGroup",
+        "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    },
+    {
+        "key": "tab",
+        "command": "workbench.action.nextEditorInGroup",
+        "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    },
+    {
+        "key": "ctrl+b",
+        "command": "workbench.view.explorer",
+        "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    },
+    {
+        "key": "ctrl+c",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    },
+    {
+        "key": "alt+h",
+        "command": "workbench.action.moveEditorToFirstGroup",
+        "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.moveEditorToNextGroup",
+        "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.moveEditorToPreviousGroup",
+        "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.moveEditorToNextGroup",
+        "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    },
+    // {
+    //     "key": "alt+j",
+    //     "command": "workbench.action.moveEditorToLastGroup",
+    //     "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    // },
+    // {
+    //     "key": "alt+k",
+    //     "command": "workbench.action.moveEditorToThirdGroup",
+    //     "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    // },
+    {
+        "key": "ctrl+r",
+        "command": "editor.action.startFindReplaceAction",
+        "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "actions.find",
+        "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "editor.action.nextMatchFindAction",
+        "when": "vim.active && vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "editor.action.replaceAll",
+        "when": "vim.active && vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+U",
+        "command": "redo",
+        "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
+    },
+]
